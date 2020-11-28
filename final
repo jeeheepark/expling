@@ -1,0 +1,305 @@
+
+// -*- coding: utf-8 -*-
+// title: expling-final
+// course: Experimental Linguistics
+// author(s): Jeehee Park
+// date created: 2020-11-26
+// description: code for final project
+
+
+
+define_ibex_controller({
+    name: "MyController1",
+    jqueryWidget: {
+        _init: function () {
+            this.options.transfer = null;
+            this.element.VBox({
+                options: this.options,
+                triggers: [1],
+                children: [
+                    "Message", this.options,
+                    "Question", this.options,
+                ]
+            });
+        }
+    },
+    properties: {}
+});
+
+define_ibex_controller({
+    name: "MyController2",
+    jqueryWidget: {
+        _init: function () {
+            this.options.transfer = null; // Remove 'click to continue message'. 
+            this.element.VBox({
+                options: this.options,
+                triggers: [1],
+                children: [
+                    "Message", this.options,
+                    "Form2", this.options
+                ]
+            });
+        }
+    },
+    properties: {}
+});
+
+
+var items = [
+
+    // Transitions 
+    //["sep", "Separator", { }],
+    
+    // Adding counter (for keeping track of Latin Square)
+    ["setcounter", "__SetCounter__", { }],
+    
+    // Bringing in external Intro chunk
+    ["introduction", "Message", { 
+        html: { include: "tutorial-intro.html" },
+        consentRequired: true,
+        consentMessage: "설명문을 읽었으며 실험 참여에 동의합니다.",
+        consentErrorMessage: "실험에 참여하시려면 동의 버튼을 클릭해 주시기 바랍니다.",
+        continueMessage: "다음 단계"
+     
+        }
+    ],
+    
+    ["explanation", "Message", {
+        html: { include: "tutorial2-intro.html" },
+        continueMessage: "실험 시작"
+        }
+    ],
+    
+    
+    // Configuring main/filler trials
+    // subject set
+
+    [["sub-short-A", 1], "MyController1",
+    {
+        html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515080-e75a4e80-31bc-11eb-9cdd-440a7d96ce5b.png' alt='imagefile' width='480'></center>",
+        q: "[모든 직원이 재난지원금을 안 받았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+    },
+    "MyController2",
+    {
+        html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515080-e75a4e80-31bc-11eb-9cdd-440a7d96ce5b.png' alt='imagefile' width='480'></center>",
+    }
+],
+
+[["sub-short-B",1], "MyController1",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515077-e6c1b800-31bc-11eb-804a-a9ec49865a81.png' alt='imagefile' width='480'></center>",
+    q: "[모든 선수가 금지약물을 안 먹었다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515077-e6c1b800-31bc-11eb-804a-a9ec49865a81.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["sub-short-C",1], "MyController1",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515075-e6292180-31bc-11eb-8ecd-ed01df97411e.png' alt='imagefile' width='480'></center>",
+    q: "[모든 학생이 시험을 안 쳤다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515075-e6292180-31bc-11eb-8ecd-ed01df97411e.png' alt='imagefile' width='480'></center>",
+}
+],
+
+
+[["sub-long-A", 2], "MyController1",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515080-e75a4e80-31bc-11eb-9cdd-440a7d96ce5b.png' alt='imagefile' width='480'></center>",
+    q: "[모든 직원이 재난지원금을 받지 않았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515080-e75a4e80-31bc-11eb-9cdd-440a7d96ce5b.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["sub-long-B", 2], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515077-e6c1b800-31bc-11eb-804a-a9ec49865a81.png' alt='imagefile' width='480'></center>",
+q: "[모든 선수가 금지약물을 먹지 않았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515077-e6c1b800-31bc-11eb-804a-a9ec49865a81.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["sub-long-C", 2], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515075-e6292180-31bc-11eb-8ecd-ed01df97411e.png' alt='imagefile' width='480'></center>",
+q: "[모든 학생이 시험을 치지 않았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515075-e6292180-31bc-11eb-8ecd-ed01df97411e.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["sub-cleft-A", 3], "MyController1",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515080-e75a4e80-31bc-11eb-9cdd-440a7d96ce5b.png' alt='imagefile' width='480'></center>",
+    q: "[모든 직원이 재난지원금을 받았다고 볼 수 없다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515080-e75a4e80-31bc-11eb-9cdd-440a7d96ce5b.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["sub-cleft-B", 3], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515077-e6c1b800-31bc-11eb-804a-a9ec49865a81.png' alt='imagefile' width='480'></center>",
+q: "[모든 선수가 금지약물을 먹었다고 볼 수 없다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515077-e6c1b800-31bc-11eb-804a-a9ec49865a81.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["sub-cleft-C", 3], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515075-e6292180-31bc-11eb-8ecd-ed01df97411e.png' alt='imagefile' width='480'></center>",
+q: "[모든 학생이 시험을 쳤다고 볼 수 없다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515075-e6292180-31bc-11eb-8ecd-ed01df97411e.png' alt='imagefile' width='480'></center>",
+}
+],
+
+//object set
+
+[["obj-short-A", 4], "MyController1",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515073-e4f7f480-31bc-11eb-8fdb-d4ff8cf1446b.png' alt='imagefile' width='480'></center>",
+    q: "[환자가 모든 치료를 안 받았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+    html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515073-e4f7f480-31bc-11eb-8fdb-d4ff8cf1446b.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["obj-short-B", 4], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515071-e3c6c780-31bc-11eb-9074-7e17549a6523.png' alt='imagefile' width='480'></center>",
+q: "[가입자가 모든 약관을 안 읽었다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515071-e3c6c780-31bc-11eb-9074-7e17549a6523.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["obj-short-C", 4], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515069-e2959a80-31bc-11eb-8fb7-3138ffebbb7d.png' alt='imagefile' width='480'></center>",
+q: "[배우가 모든 회차에 안 나왔다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515069-e2959a80-31bc-11eb-8fb7-3138ffebbb7d.png' alt='imagefile' width='480'></center>",
+}
+],
+
+
+[["obj-long-A", 5], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515073-e4f7f480-31bc-11eb-8fdb-d4ff8cf1446b.png' alt='imagefile' width='480'></center>",
+q: "[환자가 모든 치료를 받지 않았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515073-e4f7f480-31bc-11eb-8fdb-d4ff8cf1446b.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["obj-long-B", 5], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515071-e3c6c780-31bc-11eb-9074-7e17549a6523.png' alt='imagefile' width='480'></center>",
+q: "[가입자가 모든 약관을 읽지 않았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515071-e3c6c780-31bc-11eb-9074-7e17549a6523.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["obj-long-C", 5], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515069-e2959a80-31bc-11eb-8fb7-3138ffebbb7d.png' alt='imagefile' width='480'></center>",
+q: "[배우가 모든 회차에 나오지 않았다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515069-e2959a80-31bc-11eb-8fb7-3138ffebbb7d.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["obj-cleft-A", 6], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515073-e4f7f480-31bc-11eb-8fdb-d4ff8cf1446b.png' alt='imagefile' width='480'></center>",
+q: "[환자가 모든 치료를 받았다고 볼 수 없다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515073-e4f7f480-31bc-11eb-8fdb-d4ff8cf1446b.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["obj-cleft-B", 6], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515071-e3c6c780-31bc-11eb-9074-7e17549a6523.png' alt='imagefile' width='480'></center>",
+q: "[가입자가 모든 약관을 읽었다고 볼 수 없다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515071-e3c6c780-31bc-11eb-9074-7e17549a6523.png' alt='imagefile' width='480'></center>",
+}
+],
+
+[["obj-cleft-C", 6], "MyController1",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515069-e2959a80-31bc-11eb-8fb7-3138ffebbb7d.png' alt='imagefile' width='480'></center>",
+q: "[배우가 모든 회차에 나왔다고 볼 수 없다.] <br><br> 위 문장은 상황을 잘 설명하고 있나요?",
+},
+"MyController2",
+{
+html: "<center><img src='https://user-images.githubusercontent.com/75165447/100515069-e2959a80-31bc-11eb-8fb7-3138ffebbb7d.png' alt='imagefile' width='480'></center>",
+}
+],
+
+["exitqs", "Form", {
+    html: { include: "demographic-form.html" },
+    continueMessage: "결과 전송하기"
+    }
+]
+
+];
+
+var shuffleSequence = seq(
+    "setcounter",
+    "introduction",
+    "explanation",
+    rshuffle(startsWith("sub"), startsWith("obj")),
+    "exitqs");
+
+var defaults = [
+    "MyController1", {
+        as: ["네", "아니오"]
+    },
+    //"Separator", {
+    //    normalMessage: "다음 상황으로 넘어 가시려면 키보드에서 아무 키나 눌러주세요."
+    //},
+    "MyController2", {
+        html2: "자신의 답에 대한 간단한 이유를 적어주세요. <br> (적고 싶지 않다면 다음 단계로 넘어가세요.) <br><br> <input type='text' class='optional'>",
+        continueMessage: "다음 단계"
+    }
+];
